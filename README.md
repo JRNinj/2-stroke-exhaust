@@ -1,3 +1,3 @@
-# 2-stroke-exhaust calculator
+2 STROKE EXHAUST CALCULATOR Python
 
-This is a free python program for tuner and intusiast in 2 stroke engeneering, that helps and make it easier to calculate their exhausts.
+This project includes a free python software that help caclulating lenght, widht and scale of 2-stroke exhausts and build them.

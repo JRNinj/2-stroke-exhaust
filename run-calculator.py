@@ -4,7 +4,7 @@ import tkinter as tk
 def calc_exhaust():
     # ALL DATA IN 'mm'
 
-    if entry0 == None or entry1 == None or entry2 == None:
+    if entry0.get() == "" or entry1.get() == "" or entry2.get() == "":
         label4.config(text="Please enter the required data!")
         return
     else:
@@ -33,6 +33,15 @@ def calc_exhaust():
     pipe_lenght = (cone_counter_cone_length / 1.23) * pipe_multiplicator # Länge des zylindrischen Rohres zw. Konus u. Gegenkonus
     pipe_width = math.pow((pip_width_multiplicator * math.pow(manifold_width, 2)), 0.5) # Breite des Mittelstücks und Konus
     counter_cone_lenght = cone_lenght * 0.5 # Gegenkonuslänge
+
+    label_manifold_w.config(text="Manifold Width: {:.0f}mm".format(manifold_width))
+    label_manifold_l.config(text="Manifold Lenght: {:.0f}mm".format(manifold_lenght))
+    label_cone.config(text="Cone Length: {:.0f}mm".format(cone_lenght))
+    label_pipe_w.config(text="Pipe Width: {:.0f}mm".format(pipe_width))
+    label_pipe_l.config(text="Pipe Lenght: {:.0f}mm".format(pipe_lenght))
+    label_counter_cone.config(text="Counter-Cone Length: {:.0f}mm".format(counter_cone_lenght))
+    label_tailpipe_w.config(text="Tailpipe Width: {:.0f}mm".format(tailpipe_width))
+    label_tailpipe_l.config(text="Tailpipe Lenght: {:.0f}mm".format(tailpipe_lenght))
 
     print("Your Exhaust Data: \nManifold - Lenght: {:.2f} - Width: {:.2f} \nCone - Lenght: {:.2f} \nPipe - Lenght: {:.2f} - Width: {:.2f} \nCounter-Cone - Lenght: {:.2f} \nTailpipe - Lenght: {:.2f} - Width: {:.2f}".format(manifold_lenght, manifold_width, cone_lenght, pipe_lenght, pipe_width, counter_cone_lenght, tailpipe_lenght, tailpipe_width))
 
@@ -73,7 +82,7 @@ canvas0.create_window(550, 65, window=entry2)
 
 #Calculate Button
 
-button0 = tk.Button(window, text="Calculate Exhaust >", background="green", width=30, height=2, foreground="white", font=("Calibri", 14))
+button0 = tk.Button(window, text="Calculate Exhaust >", background="green", width=30, height=2, foreground="white", font=("Calibri", 14), command=calc_exhaust)
 canvas0.create_window(350, 200, window=button0)
 
 label4 = tk.Label(window, text="", foreground="red", font=("Calibri", 12))
@@ -82,25 +91,25 @@ canvas0.create_window(350, 250, window=label4)
 
 # data
 label_manifold_w = tk.Label(window, text="Manifold Width: ---", font=("Calibri", 14))
-canvas0.create_window(250, 300, window=label_manifold_w)
+canvas0.create_window(200, 300, window=label_manifold_w)
 label_manifold_l = tk.Label(window, text="Manifold Lenght: ---", font=("Calibri", 14))
-canvas0.create_window(250, 330, window=label_manifold_l)
+canvas0.create_window(200, 330, window=label_manifold_l)
 
 label_tailpipe_w = tk.Label(window, text="Tailpipe Width: ---", font=("Calibri", 14))
-canvas0.create_window(250, 380, window=label_tailpipe_w)
+canvas0.create_window(200, 380, window=label_tailpipe_w)
 label_tailpipe_l = tk.Label(window, text="Tailpipe Lenght: ---", font=("Calibri", 14))
-canvas0.create_window(250, 410, window=label_tailpipe_l)
+canvas0.create_window(200, 410, window=label_tailpipe_l)
 
 label_cone = tk.Label(window, text="Cone Length: ---", font=("Calibri", 14))
-canvas0.create_window(450, 300, window=label_cone)
+canvas0.create_window(500, 300, window=label_cone)
 
 label_pipe_w = tk.Label(window, text="Pipe Width: ---", font=("Calibri", 14))
-canvas0.create_window(450, 340, window=label_pipe_w)
+canvas0.create_window(500, 340, window=label_pipe_w)
 label_pipe_l = tk.Label(window, text="Pipe Lenght: ---", font=("Calibri", 14))
-canvas0.create_window(450, 370, window=label_pipe_l)
+canvas0.create_window(500, 370, window=label_pipe_l)
 
 label_counter_cone = tk.Label(window, text="Counter-Cone Length: ---", font=("Calibri", 14))
-canvas0.create_window(450, 410, window=label_counter_cone)
+canvas0.create_window(500, 410, window=label_counter_cone)
 
 canvas0.create_rectangle(100, 500, 200, 515)
 canvas0.create_line(200, 500, 350, 470)

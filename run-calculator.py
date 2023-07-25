@@ -51,7 +51,7 @@ def calc_exhaust():
 
     ## Calculation
     outlet_surface = math.pi * math.pow((outlet_diameter / 2), 2) # Auslass Querschnittsfläche
-    manifold_width = math.sqrt((outlet_surface * 1.2) / math.pi) * 2 # Krümmerdurchmesser
+    manifold_width = math.sqrt((outlet_surface * 1.1) / math.pi) * 2 # Krümmerdurchmesser
     manifold_length = manifold_width * manifold_multiplicator # Krümmerlänge
     tailpipe_width = manifold_width * 0.55 # Endrohr Durchmesser
     tailpipe_length = tailpipe_width * 12 # Endrohr Länge

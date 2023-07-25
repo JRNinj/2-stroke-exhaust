@@ -380,6 +380,12 @@ def export_data():
                 file.write("Program Settings:\n\nGas Temperature: {:.1f}°C\nPipe Width Multiplicator: {:.1f}\nManifold Multiplicator: {:.1f}\nPipe Length Multiplicator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, manifold_multiplicator, pipe_multiplicator))
                 file.write("Export Values:\n\nManifold Width: {:.0f}mm\nManifold Length: {:.0f}mm\nTailpipe Width: {:.0f}mm\nTailpipe Length: {:.0f}mm\nCone Length: {:.0f}mm\nPipe Width: {:.0f}mm\nPipe Length: {:.0f}mm\nCounter-Cone Length: {:.0f}mm\n".format(manifold_width, manifold_length, tailpipe_width, tailpipe_length, cone_length, pipe_width, pipe_length, counter_cone_length))
                 file.write("\n----------------------------------------------------\n\nThanks for using 2-Stroke Exhaust Calculator by Jannick Richter")
+            elif lang_var.get() == "Deutsch":
+                file.write("&&2-Takt Auspuff Rechner von Jannick Richter - Export Daten&&\n\n----------------------------------------------------\n\n")
+                file.write("Eingabewerte:\n\nAuslassgröße: {:.0f}mm\nAuslasssteuerzeit: {:.0f}°\nDrehzahl: {:.0f} 1/min\n\n".format(outlet_diameter, outlet_tax_time, n))
+                file.write("Programm Einstellungen:\n\nGas Temperatur: {:.1f}°C\nRohrbreite Multiplikator: {:.1f}\nKrümmer Multiplikator: {:.1f}\nRohrlänge Multiplikator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, manifold_multiplicator, pipe_multiplicator))
+                file.write("Export Daten:\n\nKrümmerbreite: {:.0f}mm\nKrümmerlänge: {:.0f}mm\nEndrohrbreite: {:.0f}mm\nEndrohrlänge: {:.0f}mm\nKonuslänge: {:.0f}mm\nRohrbreite: {:.0f}mm\nRohrlänge: {:.0f}mm\nGegenkonuslänge: {:.0f}mm\n".format(manifold_width, manifold_length, tailpipe_width, tailpipe_length, cone_length, pipe_width, pipe_length, counter_cone_length))
+                file.write("\n----------------------------------------------------\n\nDanke für die Benutzung vom 2-Takt Auspuff Rechner von Jannick Richter")
 
 
 label26 = tk.Label(window, text="", foreground="red", font=("Calibri", 10))

@@ -176,6 +176,7 @@ def switch_lang(lang):
         button2.config(text="Export Data")
         if label4.cget("text") != "":
             label4.config(text="Please enter the required data!")
+        label11.config(text="All data in mm")
     elif lang == "Deutsch":
         lang_var.set("Deutsch")
         window.title("2-Takt Auspuff Rechner    GUI")
@@ -218,6 +219,7 @@ def switch_lang(lang):
         label25.config(text="Endrohr")
         label100.config(text="programmiert mit 💛 von Jannick Richter")
         button2.config(text="Daten Exportieren")
+        label11.config(text="Alle Angaben in mm")
 
 
 window = tk.Tk()
@@ -229,6 +231,10 @@ canvas1.pack()
 
 label = tk.Label(window, text="2-Stroke Exhaust Calculator", font=("Calibri", 25))
 canvas1.create_window(350, 25, window=label)
+
+#all in mm
+label11 = tk.Label(window, text="All data in mm", foreground="white", background="gray", font=("Calibri", 14))
+canvas1.create_window(80, 25, window=label11)
 
 #dropdown language
 lang_var = tk.StringVar()
@@ -363,6 +369,35 @@ canvas0.create_window(200, 650, window=button1)
 
 #Export Button
 
+def export_successful():
+    popup = tk.Toplevel()
+    if lang_var.get() == "English":
+        popup.title("Success")
+        popup.geometry("250x100")
+        popup.resizable(False, False)#
+
+        canvas10 =tk.Canvas(popup, width=250, height=100, relief='raised')
+        canvas10.pack()
+
+        message_label = tk.Label(popup, text="Export was successful!", foreground="black", font=("Calibri", 14))
+        canvas10.create_window(125, 30, window=message_label)
+
+        ok_button = tk.Button(popup, text="Okay", background="green", foreground="white", border=5, command=popup.destroy)
+        canvas10.create_window(125, 70, window=ok_button)
+    elif lang_var.get() == "Deutsch":
+        popup.title("Erfolg")
+        popup.geometry("250x100")
+        popup.resizable(False, False)#
+
+        canvas10 =tk.Canvas(popup, width=250, height=100, relief='raised')
+        canvas10.pack()
+
+        message_label = tk.Label(popup, text="Export war erfolgreich!", foreground="black", font=("Calibri", 14))
+        canvas10.create_window(125, 30, window=message_label)
+
+        ok_button = tk.Button(popup, text="Okay", background="green", foreground="white", border=5, command=popup.destroy)
+        canvas10.create_window(125, 70, window=ok_button)
+
 def export_data():
     if "manifold_length" not in globals():
         if lang_var.get() == "English":
@@ -386,6 +421,7 @@ def export_data():
                 file.write("Programm Einstellungen:\n\nGas Temperatur: {:.1f}°C\nRohrbreite Multiplikator: {:.1f}\nKrümmer Multiplikator: {:.1f}\nRohrlänge Multiplikator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, manifold_multiplicator, pipe_multiplicator))
                 file.write("Export Daten:\n\nKrümmerbreite: {:.0f}mm\nKrümmerlänge: {:.0f}mm\nEndrohrbreite: {:.0f}mm\nEndrohrlänge: {:.0f}mm\nKonuslänge: {:.0f}mm\nRohrbreite: {:.0f}mm\nRohrlänge: {:.0f}mm\nGegenkonuslänge: {:.0f}mm\n".format(manifold_width, manifold_length, tailpipe_width, tailpipe_length, cone_length, pipe_width, pipe_length, counter_cone_length))
                 file.write("\n----------------------------------------------------\n\nDanke für die Benutzung vom 2-Takt Auspuff Rechner von Jannick Richter")
+        export_successful()
 
 
 label26 = tk.Label(window, text="", foreground="red", font=("Calibri", 10))

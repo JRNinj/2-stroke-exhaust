@@ -5,7 +5,7 @@ It gives any data needed to build a full functional 2 stroke exhaust.
 You DON'T have to install Python to run this application.
 
 # How to use
-1. Download the newest release at the right side of this github repository.
+1. Download in the newest release at the right side of this github repository the ".zip" file of the program
 2. Next step unzip the downloaded ZIP-File and save the folder named "2-stroke-exhaust-calc" in a suitable directory.
 3. Now open the folder and start the "run-calculator.exe" file.
 

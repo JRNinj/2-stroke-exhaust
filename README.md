@@ -2,6 +2,7 @@
 
 This project includes a free python software that help caclulating lenght, widht and scale of 2-stroke exhausts and build them.
 It gives any data needed to build a full functional 2 stroke exhaust.
+You DON'T have to install Python to run this application.
 
 # How to use
 1. Download the newest release at the right side of this github repository.

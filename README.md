@@ -14,6 +14,6 @@ When you finished you can also export your result and safe it in a ".txt" file o
 
 Have fun building your next 2-stroke exhaust and thanks for using this program.
 
-#Problems
+# Problems
 It can happen that your Anti-Virus program tries to delete the ZIP Folder or the Folder with the runnable ".exe" file. In this case the only options are to set the folders directory on the whitelist of your Anti-Virus program or deactivate the program for the moment.
 When you installed Python you can also download the ".py" file from github and run it.

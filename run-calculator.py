@@ -1,7 +1,6 @@
 import math
 import tkinter as tk
 from tkinter import filedialog
-import time
 
 def try_convert_to_float(input_string):
     try:

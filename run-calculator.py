@@ -377,7 +377,7 @@ def export_data():
             if lang_var.get() == "English":
                 file.write("&&2-Stroke Exhaust Calculator by Jannick Richter - Export Data&&\n\n----------------------------------------------------\n\n")
                 file.write("Input Values:\n\nOutlet Diameter: {:.0f}mm\nOutlet Tax Time: {:.0f}°\nRPM: {:.0f} 1/min\n\n".format(outlet_diameter, outlet_tax_time, n))
-                file.write("Program Settings:\n\nGas Temperature: {:.1f}℃\nPipe Width Multiplicator: {:.1f}\nManifold Multiplicator: {:.1f}\nPipe Length Multiplicator: {:.1f}".format(temp_gases, pip_width_multiplicator, manifold_multiplicator, pipe_multiplicator))
+                file.write("Program Settings:\n\nGas Temperature: {:.1f}°C\nPipe Width Multiplicator: {:.1f}\nManifold Multiplicator: {:.1f}\nPipe Length Multiplicator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, manifold_multiplicator, pipe_multiplicator))
                 file.write("Export Values:\n\nManifold Width: {:.0f}mm\nManifold Length: {:.0f}mm\nTailpipe Width: {:.0f}mm\nTailpipe Length: {:.0f}mm\nCone Length: {:.0f}mm\nPipe Width: {:.0f}mm\nPipe Length: {:.0f}mm\nCounter-Cone Length: {:.0f}mm\n".format(manifold_width, manifold_length, tailpipe_width, tailpipe_length, cone_length, pipe_width, pipe_length, counter_cone_length))
                 file.write("\n----------------------------------------------------\n\nThanks for using 2-Stroke Exhaust Calculator by Jannick Richter")
 

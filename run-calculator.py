@@ -1,5 +1,7 @@
 import math
 import tkinter as tk
+from tkinter import filedialog
+import time
 
 def try_convert_to_float(input_string):
     try:
@@ -19,6 +21,23 @@ def calc_exhaust():
         return
     else:
         label4.config(text="")
+
+    # Create Global Vars
+    global outlet_diameter
+    global outlet_tax_time
+    global n
+    global temp_gases
+    global pip_width_multiplicator
+    global manifold_multiplicator
+    global pipe_multiplicator
+    global manifold_width
+    global manifold_length
+    global tailpipe_length
+    global tailpipe_width
+    global cone_length
+    global pipe_length
+    global pipe_width
+    global counter_cone_length
 
     ## Important Data
     outlet_diameter = float(entry0.get()) # Auslass Durchmesser
@@ -44,14 +63,24 @@ def calc_exhaust():
     pipe_width = math.pow((pip_width_multiplicator * math.pow(manifold_width, 2)), 0.5) # Breite des Mittelstücks und Konus
     counter_cone_length = cone_length * 0.5 # Gegenkonuslänge
 
-    label_manifold_w.config(text="Manifold Width: {:.0f}mm".format(manifold_width))
-    label_manifold_l.config(text="Manifold Length: {:.0f}mm".format(manifold_length))
-    label_cone.config(text="Cone Length: {:.0f}mm".format(cone_length))
-    label_pipe_w.config(text="Pipe Width: {:.0f}mm".format(pipe_width))
-    label_pipe_l.config(text="Pipe Length: {:.0f}mm".format(pipe_length))
-    label_counter_cone.config(text="Counter-Cone Length: {:.0f}mm".format(counter_cone_length))
-    label_tailpipe_w.config(text="Tailpipe Width: {:.0f}mm".format(tailpipe_width))
-    label_tailpipe_l.config(text="Tailpipe Length: {:.0f}mm".format(tailpipe_length))
+    if lang_var.get() == "English":
+        label_manifold_w.config(text="Manifold Width: {:.0f}mm".format(manifold_width))
+        label_manifold_l.config(text="Manifold Length: {:.0f}mm".format(manifold_length))
+        label_cone.config(text="Cone Length: {:.0f}mm".format(cone_length))
+        label_pipe_w.config(text="Pipe Width: {:.0f}mm".format(pipe_width))
+        label_pipe_l.config(text="Pipe Length: {:.0f}mm".format(pipe_length))
+        label_counter_cone.config(text="Counter-Cone Length: {:.0f}mm".format(counter_cone_length))
+        label_tailpipe_w.config(text="Tailpipe Width: {:.0f}mm".format(tailpipe_width))
+        label_tailpipe_l.config(text="Tailpipe Length: {:.0f}mm".format(tailpipe_length))
+    elif lang_var.get() == "Deutsch":
+        label_manifold_w.config(text="Krümmerbreite: {:.0f}mm".format(manifold_width))
+        label_manifold_l.config(text="Krümmerlänge: {:.0f}mm".format(manifold_length))
+        label_cone.config(text="Konuslänge: {:.0f}mm".format(cone_length))
+        label_pipe_w.config(text="Rohrbreite: {:.0f}mm".format(pipe_width))
+        label_pipe_l.config(text="Rohrlänge: {:.0f}mm".format(pipe_length))
+        label_counter_cone.config(text="Gegenkonuslänge: {:.0f}mm".format(counter_cone_length))
+        label_tailpipe_w.config(text="Endrohrbreite: {:.0f}mm".format(tailpipe_width))
+        label_tailpipe_l.config(text="Endrohrlänge: {:.0f}mm".format(tailpipe_length))
 
     print("Your Exhaust Data: \nManifold - Length: {:.2f} - Width: {:.2f} \nCone - Length: {:.2f} \nPipe - Length: {:.2f} - Width: {:.2f} \nCounter-Cone - Length: {:.2f} \nTailpipe - Length: {:.2f} - Width: {:.2f}".format(manifold_length, manifold_width, cone_length, pipe_length, pipe_width, counter_cone_length, tailpipe_length, tailpipe_width))
 
@@ -111,6 +140,7 @@ def switch_lang(lang):
         label2.config(text="Outlet Tax Time:")
         label3.config(text="RPM:")
         label4.config(text="")
+        label26.config(text="")
         label7.config(text="Gas Temperature:")
         label8.config(text="Pipe Width Multiplicator:")
         label9.config(text="Manifold Multiplicator:")
@@ -119,20 +149,33 @@ def switch_lang(lang):
         label6.config(text="sharp")
         button0.config(text="Calculate Exhaust >")
         button1.config(text="Exit")
-        label_manifold_l.config(text="Manifold Length: ---")
-        label_manifold_w.config(text="Manifold Width: ---")
-        label_cone.config(text="Cone Length: ---")
-        label_pipe_l.config(text="Pipe Length: ---")
-        label_pipe_w.config(text="Pipe Width: ---")
-        label_counter_cone.config(text="Counter-Cone Length: ---")
-        label_tailpipe_l.config(text="Tailpipe Length: ---")
-        label_tailpipe_w.config(text="Tailpipe Width: ---")
+        if "manifold_length" not in globals():
+            label_manifold_l.config(text="Manifold Length: ---")
+            label_manifold_w.config(text="Manifold Width: ---")
+            label_cone.config(text="Cone Length: ---")
+            label_pipe_l.config(text="Pipe Length: ---")
+            label_pipe_w.config(text="Pipe Width: ---")
+            label_counter_cone.config(text="Counter-Cone Length: ---")
+            label_tailpipe_l.config(text="Tailpipe Length: ---")
+            label_tailpipe_w.config(text="Tailpipe Width: ---")
+        else:
+            label_manifold_l.config(text="Manifold Length: {:.0}mm".format(manifold_length))
+            label_manifold_w.config(text="Manifold Width: {:.0f}mm".format(manifold_width))
+            label_cone.config(text="Cone Length: {:.0f}mm".format(cone_length))
+            label_pipe_l.config(text="Pipe Length: {:.0f}mm".format(pipe_length))
+            label_pipe_w.config(text="Pipe Width: {:.0f}mm".format(pipe_width))
+            label_counter_cone.config(text="Counter-Cone Length: {:.0f}mm".format(counter_cone_length))
+            label_tailpipe_l.config(text="Tailpipe Length: {:.0f}mm".format(tailpipe_length))
+            label_tailpipe_w.config(text="Tailpipe Width: {:.0f}mm".format(tailpipe_width))
         label21.config(text="Manifold")
         label22.config(text="Cone")
         label23.config(text="Pipe")
         label24.config(text="Counter-Cone")
         label25.config(text="Tailpipe")
         label100.config(text="created with 💛 by Jannick Richter")
+        button2.config(text="Export Data")
+        if label4.cget("text") != "":
+            label4.config(text="Please enter the required data!")
     elif lang == "Deutsch":
         lang_var.set("Deutsch")
         window.title("2-Takt Auspuff Rechner    GUI")
@@ -141,6 +184,7 @@ def switch_lang(lang):
         label2.config(text="Auslasssteuerzeit:")
         label3.config(text="Drehzahl:")
         label4.config(text="")
+        label26.config(text="")
         label7.config(text="Gas Temperatur:")
         label8.config(text="Rohrbreite Multiplikator:")
         label9.config(text="Krümmer Multiplikator:")
@@ -149,20 +193,31 @@ def switch_lang(lang):
         label6.config(text="spitz")
         button0.config(text="Auspuff berechnen >")
         button1.config(text="Verlassen")
-        label_manifold_l.config(text="Krümmerlänge: ---")
-        label_manifold_w.config(text="Krümmerbreite: ---")
-        label_cone.config(text="Konuslänge: ---")
-        label_pipe_l.config(text="Rohrlänge: ---")
-        label_pipe_w.config(text="Rohrbreite: ---")
-        label_counter_cone.config(text="Gegenkonuslänge: ---")
-        label_tailpipe_l.config(text="Endrohrlänge: ---")
-        label_tailpipe_w.config(text="Endrohrbreite: ---")
+        if "manifold_length" not in globals():
+            label_manifold_l.config(text="Krümmerlänge: ---")
+            label_manifold_w.config(text="Krümmerbreite: ---")
+            label_cone.config(text="Konuslänge: ---")
+            label_pipe_l.config(text="Rohrlänge: ---")
+            label_pipe_w.config(text="Rohrbreite: ---")
+            label_counter_cone.config(text="Gegenkonuslänge: ---")
+            label_tailpipe_l.config(text="Endrohrlänge: ---")
+            label_tailpipe_w.config(text="Endrohrbreite: ---")
+        else:
+            label_manifold_l.config(text="Krümmerlänge: {:.0}mm".format(manifold_length))
+            label_manifold_w.config(text="Krümmerbreite: {:.0f}mm".format(manifold_width))
+            label_cone.config(text="Konuslänge: {:.0f}mm".format(cone_length))
+            label_pipe_l.config(text="Rohrlänge: {:.0f}mm".format(pipe_length))
+            label_pipe_w.config(text="Rohrbreite: {:.0f}mm".format(pipe_width))
+            label_counter_cone.config(text="Gegenkonuslänge: {:.0f}mm".format(counter_cone_length))
+            label_tailpipe_l.config(text="Endrohrlänge: {:.0f}mm".format(tailpipe_length))
+            label_tailpipe_w.config(text="Endrohrbreite: {:.0f}mm".format(tailpipe_width))
         label21.config(text="Krümmer")
         label22.config(text="Konus")
         label23.config(text="Rohr")
         label24.config(text="Gegenkonus")
         label25.config(text="Endrohr")
         label100.config(text="programmiert mit 💛 von Jannick Richter")
+        button2.config(text="Daten Exportieren")
 
 
 window = tk.Tk()
@@ -305,6 +360,31 @@ canvas0.create_window(525, 557, window=label25)
 
 button1 = tk.Button(window, text="Exit", background="gray", foreground="red", width=20, height=1, font=("Calibri", 14), command=window.quit)
 canvas0.create_window(200, 650, window=button1)
+
+#Export Button
+
+def export_data():
+    if "manifold_length" not in globals():
+        if lang_var.get() == "English":
+            label26.config(text="No data")
+        elif lang_var.get() == "Deutsch":
+            label26.config(text="Keine Daten")
+        return
+    
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Dateien", "*.txt"), ("Alle Dateien", "*.*")])
+    if file_path:
+        with open(file_path, "w") as file:
+            if lang_var.get() == "English":
+                file.write("&&2-Stroke Exhaust Calculator by Jannick Richter - Export Data&&\n\n\n")
+                file.write("Input Values:\n\nOutlet Diameter: {:.0f}mm\nOutlet Tax Time: {:.0f}°\nRPM: {:.0f} 1/min\n".format(outlet_diameter, outlet_tax_time, n))
+                file.write("Export Values:\n\nManifold Width: {:.0f}mm\nManifold Length: {:.0f}mm\nTailpipe Width: {:.0f}mm\nTailpipe Length: {:.0f}mm\nCone Length: {:.0f}mm\nPipe Width: {:.0f}".format(manifold_width, manifold_length, tailpipe_width, tailpipe_length))
+
+
+label26 = tk.Label(window, text="", foreground="red", font=("Calibri", 10))
+canvas0.create_window(500, 620, window=label26)
+
+button2 = tk.Button(window, text="Export Data", background="gray", foreground="white", width=20, height=1, font=("Calibri", 14), command=export_data)
+canvas0.create_window(500, 650, window=button2)
 
 #sign
 

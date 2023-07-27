@@ -1,5 +1,7 @@
 import math
 import tkinter as tk
+import csv
+import os
 from tkinter import filedialog
 
 def try_convert_to_float(input_string):
@@ -220,6 +222,18 @@ def switch_lang(lang):
         button2.config(text="Daten Exportieren")
         label11.config(text="Alle Angaben in mm")
 
+def create_save_file():
+    if not os.path.exists('save_data.csv'):
+        with open('save_data.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            data = [
+        ['language'],
+        ['English']
+]
+
+            # Daten in die CSV-Datei schreiben
+            writer.writerows(data)
+create_save_file()
 
 window = tk.Tk()
 window.geometry("700x800")
@@ -364,7 +378,19 @@ canvas0.create_window(525, 557, window=label25)
 
 #Exit Button
 
-button1 = tk.Button(window, text="Exit", background="gray", foreground="red", width=20, height=1, font=("Calibri", 14), command=window.quit)
+def quit_program():
+    with open('save_data.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        data = [
+        ['language'],
+        [lang_var.get()]
+]
+
+        # Daten in die CSV-Datei schreiben
+        writer.writerows(data)
+    window.quit()
+
+button1 = tk.Button(window, text="Exit", background="gray", foreground="red", width=20, height=1, font=("Calibri", 14), command=quit_program)
 canvas0.create_window(200, 650, window=button1)
 
 #Export Button
@@ -434,5 +460,13 @@ canvas0.create_window(500, 650, window=button2)
 
 label100 = tk.Label(window, text="created with 💛 by Jannick Richter", font=("Times New Roman", 12))
 canvas0.create_window(350, 700, window=label100)
+
+#Set lang
+with open('save_data.csv', mode='r', newline='') as file:
+    reader = csv.reader(file)
+    data = list(reader)
+
+    for row in data:
+        switch_lang(row[0])
 
 window.mainloop()

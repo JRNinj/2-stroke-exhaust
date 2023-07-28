@@ -24,7 +24,7 @@ def calc_exhaust():
         label4.config(text="")
 
     # Create Global Vars
-    global outlet_diameter
+    global outlet_surface
     global outlet_tax_time
     global n
     global temp_gases
@@ -41,7 +41,7 @@ def calc_exhaust():
     global reflector_length
 
     ## Important Data
-    outlet_diameter = float(entry0.get()) # Auslass Durchmesser
+    outlet_surface = float(entry0.get()) # Auslass Durchmesser
     outlet_tax_time = float(entry1.get()) # Auslasssteuerzeit (Winkel mit dem sich die Kurbelwelle dreht in °)
     n = float(entry2.get()) # Drehzahl in 1/min
 
@@ -52,8 +52,7 @@ def calc_exhaust():
     pipe_multiplicator = float(entry6.get()) # ##Werte: 0.2 - 0.4## Variabler Wert
 
     ## Calculation
-    outlet_surface = math.pi * math.pow((outlet_diameter / 2), 2) # Auslass Querschnittsfläche
-    header_width = math.sqrt((outlet_surface * 1.1) / math.pi) * 2 # Krümmerdurchmesser
+    header_width = math.sqrt((outlet_surface * 1.2) / math.pi) * 2 # Krümmerdurchmesser
     header_length = header_width * header_multiplicator # Krümmerlänge
     stinger_width = header_width * 0.55 # Endrohr Durchmesser
     stinger_length = stinger_width * 12 # Endrohr Länge
@@ -90,7 +89,7 @@ def set_config_data(scale):
         entry3.delete(0, tk.END)
         entry3.insert(0, 275)
         entry4.delete(0, tk.END)
-        entry4.insert(0, 14)
+        entry4.insert(0, 12)
         entry5.delete(0, tk.END)
         entry5.insert(0, 8)
         entry6.delete(0, tk.END)
@@ -99,7 +98,7 @@ def set_config_data(scale):
         entry3.delete(0, tk.END)
         entry3.insert(0, 281.6)
         entry4.delete(0, tk.END)
-        entry4.insert(0, 16)
+        entry4.insert(0, 14)
         entry5.delete(0, tk.END)
         entry5.insert(0, 7)
         entry6.delete(0, tk.END)
@@ -108,7 +107,7 @@ def set_config_data(scale):
         entry3.delete(0, tk.END)
         entry3.insert(0, 285)
         entry4.delete(0, tk.END)
-        entry4.insert(0, 18)
+        entry4.insert(0, 17)
         entry5.delete(0, tk.END)
         entry5.insert(0, 6)
         entry6.delete(0, tk.END)
@@ -117,7 +116,7 @@ def set_config_data(scale):
         entry3.delete(0, tk.END)
         entry3.insert(0, 270)
         entry4.delete(0, tk.END)
-        entry4.insert(0, 12)
+        entry4.insert(0, 11)
         entry5.delete(0, tk.END)
         entry5.insert(0, 9)
         entry6.delete(0, tk.END)
@@ -126,7 +125,7 @@ def set_config_data(scale):
         entry3.delete(0, tk.END)
         entry3.insert(0, 267.3)
         entry4.delete(0, tk.END)
-        entry4.insert(0, 10)
+        entry4.insert(0, 9)
         entry5.delete(0, tk.END)
         entry5.insert(0, 11)
         entry6.delete(0, tk.END)
@@ -137,7 +136,7 @@ def switch_lang(lang):
         lang_var.set("English")
         window.title("2-Stroke Exhaust Calculator   GUI")
         label.config(text="2-Stroke Exhaust Calculator")
-        label1.config(text="Outlet Diameter:")
+        label1.config(text="Outlet Surface:")
         label2.config(text="Outlet Tax Time:")
         label3.config(text="RPM:")
         label4.config(text="")
@@ -182,7 +181,7 @@ def switch_lang(lang):
         lang_var.set("Deutsch")
         window.title("2-Takt Auspuff Rechner    GUI")
         label.config(text="2-Takt Auspuff Rechner")
-        label1.config(text="Auslass Größe:")
+        label1.config(text="Auslass Fläche:")
         label2.config(text="Auslasssteuerzeit:")
         label3.config(text="Drehzahl:")
         label4.config(text="")
@@ -261,7 +260,7 @@ canvas0.pack()
 
 # outlet 
 
-label1 = tk.Label(window, text="Outlet Diameter:")
+label1 = tk.Label(window, text="Outlet Surface:")
 label1.config(font=('helvetica', 14))
 canvas0.create_window(150, 25, window=label1)
 
@@ -437,13 +436,13 @@ def export_data():
         with open(file_path, "w") as file:
             if lang_var.get() == "English":
                 file.write("&&2-Stroke Exhaust Calculator by Jannick Richter - Export Data&&\n\n----------------------------------------------------\n\n")
-                file.write("Input Values:\n\nOutlet Diameter: {:.0f}mm\nOutlet Tax Time: {:.0f}°\nRPM: {:.0f} 1/min\n\n".format(outlet_diameter, outlet_tax_time, n))
+                file.write("Input Values:\n\nOutlet Surface: {:.0f}mm\nOutlet Tax Time: {:.0f}°\nRPM: {:.0f} 1/min\n\n".format(outlet_surface, outlet_tax_time, n))
                 file.write("Program Settings:\n\nGas Temperature: {:.1f}°C\nPipe Width Multiplicator: {:.1f}\nHeader Multiplicator: {:.1f}\nPipe Length Multiplicator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, header_multiplicator, pipe_multiplicator))
                 file.write("Export Values:\n\nHeader Width: {:.0f}mm\nHeader Length: {:.0f}mm\nStinger Width: {:.0f}mm\nStinger Length: {:.0f}mm\nDiffuser Length: {:.0f}mm\nPipe Width: {:.0f}mm\nPipe Length: {:.0f}mm\nReflector Length: {:.0f}mm\n".format(header_width, header_length, stinger_width, stinger_length, diffuser_length, pipe_width, pipe_length, reflector_length))
                 file.write("\n----------------------------------------------------\n\nThanks for using 2-Stroke Exhaust Calculator by Jannick Richter")
             elif lang_var.get() == "Deutsch":
                 file.write("&&2-Takt Auspuff Rechner von Jannick Richter - Export Daten&&\n\n----------------------------------------------------\n\n")
-                file.write("Eingabewerte:\n\nAuslassgröße: {:.0f}mm\nAuslasssteuerzeit: {:.0f}°\nDrehzahl: {:.0f} 1/min\n\n".format(outlet_diameter, outlet_tax_time, n))
+                file.write("Eingabewerte:\n\nAuslass Fläche: {:.0f}mm\nAuslasssteuerzeit: {:.0f}°\nDrehzahl: {:.0f} 1/min\n\n".format(outlet_surface, outlet_tax_time, n))
                 file.write("Programm Einstellungen:\n\nGas Temperatur: {:.1f}°C\nRohrbreite Multiplikator: {:.1f}\nKrümmer Multiplikator: {:.1f}\nRohrlänge Multiplikator: {:.1f}\n\n".format(temp_gases, pip_width_multiplicator, header_multiplicator, pipe_multiplicator))
                 file.write("Export Daten:\n\nKrümmerbreite: {:.0f}mm\nKrümmerlänge: {:.0f}mm\nEndrohrbreite: {:.0f}mm\nEndrohrlänge: {:.0f}mm\nKonuslänge: {:.0f}mm\nRohrbreite: {:.0f}mm\nRohrlänge: {:.0f}mm\nGegenkonuslänge: {:.0f}mm\n".format(header_width, header_length, stinger_width, stinger_length, diffuser_length, pipe_width, pipe_length, reflector_length))
                 file.write("\n----------------------------------------------------\n\nDanke für die Benutzung vom 2-Takt Auspuff Rechner von Jannick Richter")
